@@ -1,0 +1,296 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TraderMarketPlaceModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="TraderMarketPlaceEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Account" EntityType="TraderMarketPlaceModel.Account" />
+    <EntitySet Name="Category" EntityType="TraderMarketPlaceModel.Category" />
+    <EntitySet Name="Country" EntityType="TraderMarketPlaceModel.Country" />
+    <EntitySet Name="Order" EntityType="TraderMarketPlaceModel.Order" />
+    <EntitySet Name="Product" EntityType="TraderMarketPlaceModel.Product" />
+    <EntitySet Name="ProductOrder" EntityType="TraderMarketPlaceModel.ProductOrder" />
+    <EntitySet Name="Status" EntityType="TraderMarketPlaceModel.Status" />
+    <EntitySet Name="sysdiagrams" EntityType="TraderMarketPlaceModel.sysdiagrams" />
+    <EntitySet Name="Town" EntityType="TraderMarketPlaceModel.Town" />
+    <EntitySet Name="User" EntityType="TraderMarketPlaceModel.User" />
+    <EntitySet Name="UserType" EntityType="TraderMarketPlaceModel.UserType" />
+    <AssociationSet Name="FK_Order_Account" Association="TraderMarketPlaceModel.FK_Order_Account">
+      <End Role="Account" EntitySet="Account" />
+      <End Role="Order" EntitySet="Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_Account" Association="TraderMarketPlaceModel.FK_Product_Account">
+      <End Role="Account" EntitySet="Account" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Account" Association="TraderMarketPlaceModel.FK_User_Account">
+      <End Role="Account" EntitySet="Account" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_Category" Association="TraderMarketPlaceModel.FK_Product_Category">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Town_Country" Association="TraderMarketPlaceModel.FK_Town_Country">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="Town" EntitySet="Town" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Status" Association="TraderMarketPlaceModel.FK_Order_Status">
+      <End Role="Status" EntitySet="Status" />
+      <End Role="Order" EntitySet="Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductOrder_Order" Association="TraderMarketPlaceModel.FK_ProductOrder_Order">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="ProductOrder" EntitySet="ProductOrder" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductOrder_Product" Association="TraderMarketPlaceModel.FK_ProductOrder_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="ProductOrder" EntitySet="ProductOrder" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Town" Association="TraderMarketPlaceModel.FK_User_Town">
+      <End Role="Town" EntitySet="Town" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_UserType" Association="TraderMarketPlaceModel.FK_User_UserType">
+      <End Role="UserType" EntitySet="UserType" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Guid" Nullable="false" />
+    <Property Name="Username" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Order" Relationship="TraderMarketPlaceModel.FK_Order_Account" FromRole="Account" ToRole="Order" />
+    <NavigationProperty Name="Product" Relationship="TraderMarketPlaceModel.FK_Product_Account" FromRole="Account" ToRole="Product" />
+    <NavigationProperty Name="User" Relationship="TraderMarketPlaceModel.FK_User_Account" FromRole="Account" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Guid" Nullable="false" />
+    <Property Name="Category1" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Product" Relationship="TraderMarketPlaceModel.FK_Product_Category" FromRole="Category" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Guid" Nullable="false" />
+    <Property Name="Country1" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Town" Relationship="TraderMarketPlaceModel.FK_Town_Country" FromRole="Country" ToRole="Town" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Guid" Nullable="false" />
+    <Property Name="StatusID" Type="Guid" Nullable="false" />
+    <Property Name="AccountID" Type="Guid" Nullable="false" />
+    <Property Name="DateOfPurchase" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="Account" Relationship="TraderMarketPlaceModel.FK_Order_Account" FromRole="Order" ToRole="Account" />
+    <NavigationProperty Name="Status" Relationship="TraderMarketPlaceModel.FK_Order_Status" FromRole="Order" ToRole="Status" />
+    <NavigationProperty Name="ProductOrder" Relationship="TraderMarketPlaceModel.FK_ProductOrder_Order" FromRole="Order" ToRole="ProductOrder" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Guid" Nullable="false" />
+    <Property Name="Code" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="AccountID" Type="Guid" Nullable="false" />
+    <Property Name="CategoryID" Type="Guid" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="ImageURL" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Price" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <NavigationProperty Name="Account" Relationship="TraderMarketPlaceModel.FK_Product_Account" FromRole="Product" ToRole="Account" />
+    <NavigationProperty Name="Category" Relationship="TraderMarketPlaceModel.FK_Product_Category" FromRole="Product" ToRole="Category" />
+    <NavigationProperty Name="ProductOrder" Relationship="TraderMarketPlaceModel.FK_ProductOrder_Product" FromRole="Product" ToRole="ProductOrder" />
+  </EntityType>
+  <EntityType Name="ProductOrder">
+    <Key>
+      <PropertyRef Name="ProductID" />
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="ProductID" Type="Guid" Nullable="false" />
+    <Property Name="OrderID" Type="Guid" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Order" Relationship="TraderMarketPlaceModel.FK_ProductOrder_Order" FromRole="ProductOrder" ToRole="Order" />
+    <NavigationProperty Name="Product" Relationship="TraderMarketPlaceModel.FK_ProductOrder_Product" FromRole="ProductOrder" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Status">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Guid" Nullable="false" />
+    <Property Name="Status1" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Order" Relationship="TraderMarketPlaceModel.FK_Order_Status" FromRole="Status" ToRole="Order" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Town">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Guid" Nullable="false" />
+    <Property Name="Town1" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="CountryID" Type="Guid" Nullable="false" />
+    <NavigationProperty Name="Country" Relationship="TraderMarketPlaceModel.FK_Town_Country" FromRole="Town" ToRole="Country" />
+    <NavigationProperty Name="User" Relationship="TraderMarketPlaceModel.FK_User_Town" FromRole="Town" ToRole="User" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Guid" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Surname" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="HouseNumber" Type="Int32" Nullable="false" />
+    <Property Name="StreetName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="TownID" Type="Guid" Nullable="false" />
+    <Property Name="UserTypeID" Type="Guid" Nullable="false" />
+    <Property Name="AccountID" Type="Guid" Nullable="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Account" Relationship="TraderMarketPlaceModel.FK_User_Account" FromRole="User" ToRole="Account" />
+    <NavigationProperty Name="Town" Relationship="TraderMarketPlaceModel.FK_User_Town" FromRole="User" ToRole="Town" />
+    <NavigationProperty Name="UserType" Relationship="TraderMarketPlaceModel.FK_User_UserType" FromRole="User" ToRole="UserType" />
+  </EntityType>
+  <EntityType Name="UserType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Guid" Nullable="false" />
+    <Property Name="UserType1" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="User" Relationship="TraderMarketPlaceModel.FK_User_UserType" FromRole="UserType" ToRole="User" />
+  </EntityType>
+  <Association Name="FK_Order_Account">
+    <End Role="Account" Type="TraderMarketPlaceModel.Account" Multiplicity="1" />
+    <End Role="Order" Type="TraderMarketPlaceModel.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="AccountID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_Account">
+    <End Role="Account" Type="TraderMarketPlaceModel.Account" Multiplicity="1" />
+    <End Role="Product" Type="TraderMarketPlaceModel.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="AccountID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Account">
+    <End Role="Account" Type="TraderMarketPlaceModel.Account" Multiplicity="1" />
+    <End Role="User" Type="TraderMarketPlaceModel.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="AccountID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_Category">
+    <End Role="Category" Type="TraderMarketPlaceModel.Category" Multiplicity="1" />
+    <End Role="Product" Type="TraderMarketPlaceModel.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Town_Country">
+    <End Role="Country" Type="TraderMarketPlaceModel.Country" Multiplicity="1" />
+    <End Role="Town" Type="TraderMarketPlaceModel.Town" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Town">
+        <PropertyRef Name="CountryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Status">
+    <End Role="Status" Type="TraderMarketPlaceModel.Status" Multiplicity="1" />
+    <End Role="Order" Type="TraderMarketPlaceModel.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Status">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="StatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductOrder_Order">
+    <End Role="Order" Type="TraderMarketPlaceModel.Order" Multiplicity="1" />
+    <End Role="ProductOrder" Type="TraderMarketPlaceModel.ProductOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ProductOrder">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductOrder_Product">
+    <End Role="Product" Type="TraderMarketPlaceModel.Product" Multiplicity="1" />
+    <End Role="ProductOrder" Type="TraderMarketPlaceModel.ProductOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ProductOrder">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Town">
+    <End Role="Town" Type="TraderMarketPlaceModel.Town" Multiplicity="1" />
+    <End Role="User" Type="TraderMarketPlaceModel.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Town">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="TownID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_UserType">
+    <End Role="UserType" Type="TraderMarketPlaceModel.UserType" Multiplicity="1" />
+    <End Role="User" Type="TraderMarketPlaceModel.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="UserTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

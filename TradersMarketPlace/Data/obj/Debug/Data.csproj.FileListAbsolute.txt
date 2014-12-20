@@ -1,0 +1,7 @@
+C:\Users\ClaireG\Desktop\TradersMarketPlace\Data\bin\Debug\Data.dll
+C:\Users\ClaireG\Desktop\TradersMarketPlace\Data\bin\Debug\Data.pdb
+C:\Users\ClaireG\Desktop\TradersMarketPlace\Data\bin\Debug\Common.dll
+C:\Users\ClaireG\Desktop\TradersMarketPlace\Data\bin\Debug\Common.pdb
+C:\Users\ClaireG\Desktop\TradersMarketPlace\Data\obj\Debug\Data.csprojResolveAssemblyReference.cache
+C:\Users\ClaireG\Desktop\TradersMarketPlace\Data\obj\Debug\Data.dll
+C:\Users\ClaireG\Desktop\TradersMarketPlace\Data\obj\Debug\Data.pdb
